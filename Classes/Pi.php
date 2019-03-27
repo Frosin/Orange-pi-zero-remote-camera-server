@@ -24,14 +24,20 @@ class Pi
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $msg = curl_exec ($ch);
+        $msg = curl_exec($ch);
         $info = curl_getinfo($ch);
         
-        if ($info['http_code'] != 200){
+        if ($info['http_code'] != 200) {
             $returnMessage = json_decode($msg, 1);
             throw new \Exception("Error in sending to server: " . $returnMessage);
         }
         curl_close($ch);
+
+        unset($post);
+        unset($ch);
+        unset($msg);
+        unset($info);
+        
         return true;
     }
 }
