@@ -1,7 +1,7 @@
 <?php
 namespace Classes;
 
-class Server
+class Pi
 {
     private $serverUrl;
 
@@ -20,7 +20,7 @@ class Server
             'file' => curl_file_create($fileName, '', '')
         );
         
-        $ch = curl_init($this->servevrUrl);
+        $ch = curl_init($this->serverUrl);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

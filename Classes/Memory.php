@@ -38,7 +38,8 @@ class Memory
         return $this->connected;
     }
 
-    public function get($obj) {
+    public function get($obj) 
+    {
         $result = $this->memcache->get($obj);
         if (!$result) {
             throw new \Exception("Object = `$obj` not found or empty");
@@ -47,7 +48,8 @@ class Memory
     }
 
 
-    public function set($obj, $value) {
+    public function set($obj, $value) 
+    {
         $result = $this->memcache->set($obj, $value);
         if (!$result) {
             throw new \Exception("Can't set new value = `$value` to object = `$obj`");
@@ -56,15 +58,25 @@ class Memory
         }
     }
 
-    public function add($obj, $value, $livetime) {
+    public function add($obj, $value, $livetime) 
+    {
         $result = $this->memcache->add($obj, $value, false, $livetime);
 
         if (!$result) {
+            $this->set($obj, $value);
+        }
+
+        return $this;
+    }
+
+    public function addStrict($obj, $value, $livetime)
+    {
+        $result = $this->memcache->add($obj, $value, false, $livetime);
+        
+        if (!$result) {
             throw new \Exception("This object `$obj` already exists or it was adding error");
-        } else {
+        } else {   
             return $this;
         }
     }
-
-
 }
