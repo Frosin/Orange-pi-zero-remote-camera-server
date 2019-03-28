@@ -14,8 +14,8 @@ class Camera
     public function makeShot() 
     {
         $fileName = realpath(__DIR__ . "/../") . '/shot.jpg';
-        //shell_exec("fswebcam -d /dev/video0 -r " . $this->resolution . __DIR__ . "/$fileName");
-        shell_exec('php ~/Рабочий\ стол/orange_pi_camera/makephoto.php');
+        shell_exec("fswebcam -d /dev/video0 -S 3 -r " . $this->resolution . " $fileName");
+        //shell_exec('php ~/Рабочий\ стол/orange_pi_camera/makephoto.php');
 
         if (!file_exists($fileName)) {
             throw new \Exception("Error in making photo. File `$fileName` not found");
