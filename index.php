@@ -1,3 +1,16 @@
+<?php
+$require = file_get_contents('require.txt');
+if (isset($_GET['key']) && md5($_GET['key']) == $require) {
+    //
+} else {
+    file_put_contents(__DIR__ . "/log-bad-access.log", date("d.m.Y H:i:s") . " : " . $_SERVER['REMOTE_ADDR'] . "\n", FILE_APPEND);
+    header("HTTP/1.0 404 Not Found");
+    header("HTTP/1.1 404 Not Found");
+    header("Status: 404 Not Found");
+    die();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
