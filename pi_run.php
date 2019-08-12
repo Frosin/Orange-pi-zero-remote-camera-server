@@ -2,7 +2,7 @@
 
 require_once(__DIR__ .'/init.php');
 
-$uploadScript = file_get_contents('uploadScript.txt');
+$uploadScript = file_get_contents(__DIR__ .'/uploadScript.txt');
 
 try {
     $camera = new Classes\Camera();
